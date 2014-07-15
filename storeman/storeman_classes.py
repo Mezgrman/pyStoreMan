@@ -211,12 +211,15 @@ class GUI(object):
 	def callback_treeview_overview_places_changed(self, selection):
 		# A row has been clicked in the overview place list, show contained items in the item list
 		id = None
+		name = None
 		
 		model, pathlist = selection.get_selected_rows()
 		for path in pathlist:
 			tree_iter = model.get_iter(path)
 			id = model.get_value(tree_iter, self.COL_NAMES_PLACE["ID"])
+			name = model.get_value(tree_iter, self.COL_NAMES_PLACE["NAME"])
 		
+		self.frame_overview_item_list.set_label("Items @ %s" % name if name else "All Items")
 		self.FILTER_OVERVIEW_ITEMS_PLACE_ID = id
 		self.liststore_filter_overview_items.refilter()
 	
@@ -229,6 +232,8 @@ class GUI(object):
 	
 	def callback_entry_search_term_changed(self, entry):
 		# Text has been deleted from the search term entry
+		value = entry.get_text()
+		self.frame_search_item_list.set_label("Matching Items" if value else "All Items")
 		self.liststore_filter_search_items.refilter()
 	
 	def callback_treeview_search_items_changed(self, selection):
@@ -451,7 +456,7 @@ class GUI(object):
 		self.padding_overview_item_list.pack_start(self.scroll_treeview_overview_items, padding = 10)
 		
 		# Frame
-		self.frame_overview_item_list = gtk.Frame(label = "Items")
+		self.frame_overview_item_list = gtk.Frame(label = "All Items")
 		self.frame_overview_item_list.add(self.padding_overview_item_list)
 		
 		"""
@@ -584,7 +589,7 @@ class GUI(object):
 		self.scroll_treeview_search_items.add(self.treeview_search_items)
 		
 		# Frame
-		self.frame_search_item_list = gtk.Frame(label = "Matching Items")
+		self.frame_search_item_list = gtk.Frame(label = "All Items")
 		self.frame_search_item_list.add(self.scroll_treeview_search_items)
 		
 		"""
