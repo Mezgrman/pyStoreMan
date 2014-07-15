@@ -187,10 +187,10 @@ class GUI(object):
 				item[self.COL_NAMES_ITEM["PLACE_NAME"]] = "UNKNOWN"
 	
 	def _update_item(self, entry):
-		self.cur.execute("UPDATE `items` SET `name` = ?, `place_id` = ?, `details` = ?, `amount` = ? WHERE `id` = ?", (entry[self.COL_NAMES_ITEM["NAME"]], entry[self.COL_NAMES_ITEM["PLACE_ID"]], entry[self.COL_NAMES_ITEM["DETAILS"]], entry[self.COL_NAMES_ITEM["AMOUNT"]], entry[self.COL_NAMES_ITEM["ID"]]))
+		self.cur.execute("UPDATE `items` SET `name` = ?, `place_id` = ?, `details` = ?, `amount` = ? WHERE `id` = ?", (entry[self.COL_NAMES_ITEM["NAME"]].decode('utf-8'), entry[self.COL_NAMES_ITEM["PLACE_ID"]], entry[self.COL_NAMES_ITEM["DETAILS"]].decode('utf-8'), entry[self.COL_NAMES_ITEM["AMOUNT"]], entry[self.COL_NAMES_ITEM["ID"]]))
 	
 	def _update_place(self, entry):
-		self.cur.execute("UPDATE `places` SET `name` = ?, `location` = ?, `type` = ? WHERE `id` = ?", (entry[self.COL_NAMES_PLACE["NAME"]], entry[self.COL_NAMES_PLACE["LOCATION"]], entry[self.COL_NAMES_PLACE["TYPE"]], entry[self.COL_NAMES_PLACE["ID"]]))
+		self.cur.execute("UPDATE `places` SET `name` = ?, `location` = ?, `type` = ? WHERE `id` = ?", (entry[self.COL_NAMES_PLACE["NAME"]].decode('utf-8'), entry[self.COL_NAMES_PLACE["LOCATION"]].decode('utf-8'), entry[self.COL_NAMES_PLACE["TYPE"]].decode('utf-8'), entry[self.COL_NAMES_PLACE["ID"]]))
 	
 	def add_place(self, place, save_to_db = True):
 		# Add a place to all place lists
