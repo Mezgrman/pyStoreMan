@@ -292,7 +292,7 @@ class GUI(object):
 			except IndexError:
 				pass
 		elif button is self.button_search_add_item:
-			new_item = Item(None, "Name", None, "Details", 1)
+			new_item = Item(None, "Name", None, "", 1)
 			self.add_item(new_item)
 		elif button is self.button_search_remove_item:
 			model, pathlist = self.treeview_search_items_selection.get_selected_rows()
