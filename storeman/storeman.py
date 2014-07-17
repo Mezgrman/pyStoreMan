@@ -9,8 +9,16 @@ Main program
 
 from storeman_classes import GUI
 
+import os
+
 def main():
-	gui = GUI(database = "storeman.db")
+	# Store the database in ~/.pyStoreMan/storeman.db
+	db_file = os.path.join(os.path.expanduser("~"), ".pyStoreMan/storeman.db")
+	dirname = os.path.dirname(db_file)
+	if not os.path.exists(dirname):
+		os.makedirs(dirname)
+	
+	gui = GUI(database = db_file)
 	gui.run()
 
 if __name__ == "__main__":
